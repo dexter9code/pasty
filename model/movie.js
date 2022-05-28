@@ -52,5 +52,5 @@ function validateMovie(movie) {
   return schema.validate(movie);
 }
 
-module.exports = Movie;
-module.exports = validateMovie;
+module.exports.Movie = Movie;
+module.exports.validateMovie = validateMovie;
