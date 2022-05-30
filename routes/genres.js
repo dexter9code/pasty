@@ -3,6 +3,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 const authObjectId = require("../middleware/authObjectId");
+const isAdmin = require("../middleware/isAdmin");
 const { Genre, validateGenre } = require("../model/genre");
 
 router.get("/", async (req, res) => {
@@ -38,7 +39,7 @@ router.post("/:id", auth, async (req, res) => {
   res.send(genre);
 });
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", [auth, isAdmin, authObjectId], async (req, res) => {
   const genre = Genre.findByIdAndRemove(req.params.id);
   if (!genre) return res.status(400).send("Invalid ID");
 

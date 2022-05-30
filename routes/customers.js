@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
 const auth = require("../middleware/auth");
+const authObjectId = require("../middleware/authObjectId");
+const isAdmin = require("../middleware/isAdmin");
 
 const { Customer, validateCustomer } = require("../model/customer");
 
@@ -21,7 +23,7 @@ router.post("/", async (req, res) => {
   res.send(customer);
 });
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", [auth, isAdmin, authObjectId], async (req, res) => {
   const customer = await Customer.findByIdAndRemove(req.params.id);
   if (!customer) return res.status(400).send("Invalid ID");
 
