@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
 
   await user.save();
+  const token = user.generateAuthToken();
   const result = _.pick(user, ["name", "email"]);
   res.send(result);
 });

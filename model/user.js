@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("@hapi/joi");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -23,6 +25,11 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
   },
 });
+
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({ _id: this._id }, process.env.JWT_PrivateKey);
+  return token;
+};
 
 const User = mongoose.model("user", userSchema);
 
