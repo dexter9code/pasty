@@ -30,5 +30,8 @@ mongoose
     console.log("error while connecting with mongodb...", error)
   );
 
+//listening port
 const port = process.env.PORT || 2323;
 app.listen(port, () => console.log(`listening on the ${port}`));
+
+console.log(app.get("env"));
