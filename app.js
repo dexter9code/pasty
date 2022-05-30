@@ -7,12 +7,14 @@ const home = require("./routes/home");
 const movies = require("./routes/movies");
 const genres = require("./routes/genres");
 const customers = require("./routes/customers");
+const users = require("./routes/users");
 
 app.use(express.json());
 app.use("/", home);
 app.use("/pasty/movies", movies);
 app.use("/pasty/genres", genres);
 app.use("/pasty/customers", customers);
+app.use("/pasty/users", users);
 
 //templates engine
 app.set("view engine", "pug");
