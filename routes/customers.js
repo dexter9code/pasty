@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
+const auth = require("../middleware/auth");
 
 const { Customer, validateCustomer } = require("../model/customer");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   const customer = await Customer.find()
     .select({ name: 1, isGold: 1 })
     .sort("name");
@@ -20,7 +21,7 @@ router.post("/", async (req, res) => {
   res.send(customer);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   const customer = await Customer.findByIdAndRemove(req.params.id);
   if (!customer) return res.status(400).send("Invalid ID");
 
