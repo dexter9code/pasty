@@ -5,6 +5,7 @@ const { Movie, validateMovie } = require("../model/movie");
 const { Genre } = require("../model/genre");
 const authObjectId = require("../middleware/authObjectId");
 const auth = require("../middleware/auth");
+const isAdmin = require("../middleware/isAdmin");
 
 router.get("/", async (req, res) => {
   const movie = await Movie.find().sort("title");
@@ -40,7 +41,7 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.delete("/:id", auth, authObjectId, async (req, res) => {
+router.delete("/:id", [auth, isAdmin, authObjectId], async (req, res) => {
   const movie = await Movie.findByIdAndRemove(req.params.id);
   if (!movie) return res.status(400).send("INVALID ID");
   res.send(movie);
