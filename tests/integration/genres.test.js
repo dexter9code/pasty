@@ -87,4 +87,18 @@ describe("/pasty/genres", () => {
     expect(res.body).toHaveProperty("_id");
     expect(res.body).toHaveProperty("name");
   });
+
+  describe("PUT/", () => {
+    it("should return 401 if client is not logged in  ", async () => {
+      const genre = new Genre({ name: "genre1" });
+      await genre.save();
+      const token = "";
+      const res = await request(server)
+        .put("/pasty/genres/" + genre._id)
+        .set("x-auth-token", token)
+        .send({ name: "updatedgenre" });
+
+      expect(res.status).toBe(401);
+    });
+  });
 });
