@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../model/user");
+const { User } = require("../../model/user");
 
 describe("user.genrateAuthToken", () => {
   it("should return valid json web token", () => {

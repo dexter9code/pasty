@@ -10,6 +10,6 @@ module.exports = function (req, res, next) {
     req.user = decode;
     next();
   } catch (error) {
-    res.send(400).send(error);
+    res.status(400).send(error);
   }
 };
