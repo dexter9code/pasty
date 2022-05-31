@@ -9,6 +9,7 @@ const genres = require("./routes/genres");
 const customers = require("./routes/customers");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
+const rental = require("./routes/rentals");
 
 app.use(express.json());
 app.use("/", home);
@@ -17,6 +18,7 @@ app.use("/pasty/genres", genres);
 app.use("/pasty/customers", customers);
 app.use("/pasty/users", users);
 app.use("/pasty/auth", auth);
+app.use("/pasty/rentals", rental);
 
 //templates engine
 app.set("view engine", "pug");
