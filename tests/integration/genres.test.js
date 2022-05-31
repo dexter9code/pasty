@@ -1,5 +1,4 @@
 const request = require("supertest");
-const mongoose = require("mongoose");
 
 const { Genre } = require("../../model/genre");
 const { User } = require("../../model/user");
