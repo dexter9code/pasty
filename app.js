@@ -10,6 +10,7 @@ const customers = require("./routes/customers");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 const rental = require("./routes/rentals");
+const returns = require("./routes/returns");
 
 app.use(express.json());
 app.use("/", home);
@@ -19,6 +20,7 @@ app.use("/pasty/customers", customers);
 app.use("/pasty/users", users);
 app.use("/pasty/auth", auth);
 app.use("/pasty/rentals", rental);
+app.use("/pasty/returns", returns);
 
 //templates engine
 app.set("view engine", "pug");
